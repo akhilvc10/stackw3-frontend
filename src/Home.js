@@ -30,6 +30,20 @@ const style = {
 	p: 4
 };
 
+const downloadFromAnchor = (resource_link) => {
+	const link = document.createElement("a");
+	link.href = resource_link;
+
+	// Append to html link element page
+	document.body.appendChild(link);
+
+	// Start download
+	link.click();
+
+	// Clean up and remove the link
+	link.parentNode.removeChild(link);
+};
+
 function Home() {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
@@ -54,8 +68,10 @@ function Home() {
 	};
 
 	const onClickDownload = () => {
-		const gitHubRedirectURL = `https://qy8ve8bwcf.execute-api.ap-south-1.amazonaws.com/prod/github?data=${jsLibrary},${cssLibrary},${templateName},download`;
-		window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${gitHubRedirectURL}&scope=repo`;
+		const url = `https://github.com/akhilvc10/${
+			jsLibrary + "-" + cssLibrary
+		}/archive/refs/heads/main.zip`;
+		downloadFromAnchor(url);
 	};
 
 	return (
