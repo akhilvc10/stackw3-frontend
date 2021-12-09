@@ -159,6 +159,7 @@ function Home() {
 						variant="outlined"
 					/>
 					<Button
+						disabled={!templateName}
 						onClick={onClickGithub}
 						style={{
 							marginTop: "20px"
