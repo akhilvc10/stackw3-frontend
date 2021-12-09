@@ -31,7 +31,6 @@ const style = {
 };
 
 function Home() {
-	const [user, setUser] = useState();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -48,18 +47,6 @@ function Home() {
 	const handleCssLibrary = (event) => {
 		setCssLibrary(event.target.value);
 	};
-
-	useEffect(() => {
-		(async function () {
-			const usr = await axios
-				.get(`http://localhost:4000/api/me`, {
-					withCredentials: true
-				})
-				.then((res) => res.data);
-
-			setUser(usr);
-		})();
-	}, []);
 
 	const onClickGithub = () => {
 		const gitHubRedirectURL = `https://qy8ve8bwcf.execute-api.ap-south-1.amazonaws.com/prod/github?data=${jsLibrary},${cssLibrary},${templateName},repo`;
@@ -128,7 +115,7 @@ function Home() {
 				</Button>
 
 				<Button onClick={handleOpen} variant="contained">
-					Add to your github repo
+					Add to your github
 				</Button>
 			</Paper>
 			<Modal
