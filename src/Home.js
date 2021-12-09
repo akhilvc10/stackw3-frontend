@@ -49,9 +49,13 @@ function Home() {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const [jsLibrary, setJsLibrary] = useState("react");
-	const [cssLibrary, setCssLibrary] = useState("material-ui");
+	const [jsLibrary, setJsLibrary] = useState("");
+	const [cssLibrary, setCssLibrary] = useState("");
 	const [templateName, setTemplateName] = useState("");
+
+	useEffect(() => {
+		setCssLibrary("");
+	}, [jsLibrary]);
 
 	// const gitHubRedirectURL = `http://localhost:4000/api/auth/github?data=${jsLibrary},${cssLibrary},${templateName}`;
 	const handleJsLibrary = (event) => {
@@ -99,13 +103,13 @@ function Home() {
 			</AppBar>
 
 			<SelectionCard
-				title="JS Library"
+				title="Select JS Library"
 				data={["react", "vite"]}
 				value={jsLibrary}
 				handleChange={handleJsLibrary}
 			/>
 			<SelectionCard
-				title="Css Library"
+				title="Select css Library"
 				data={
 					jsLibrary === "react"
 						? ["material-ui", "tailwind"]
@@ -122,6 +126,7 @@ function Home() {
 				}}
 				variant="outlined">
 				<Button
+					disabled={!jsLibrary || !cssLibrary}
 					onClick={onClickDownload}
 					style={{
 						marginRight: 10
@@ -130,7 +135,10 @@ function Home() {
 					Download
 				</Button>
 
-				<Button onClick={handleOpen} variant="contained">
+				<Button
+					disabled={!jsLibrary || !cssLibrary}
+					onClick={handleOpen}
+					variant="contained">
 					Add to your github
 				</Button>
 			</Paper>

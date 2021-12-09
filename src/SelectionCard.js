@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,6 +8,7 @@ import { Paper } from "@mui/material";
 
 export default function SelectionCard(props) {
 	const { data, title, handleChange, value } = props;
+
 	return (
 		<Paper
 			style={{
